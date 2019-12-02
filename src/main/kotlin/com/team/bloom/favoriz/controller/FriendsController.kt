@@ -1,7 +1,11 @@
 package com.team.bloom.favoriz.controller
 
+import com.team.bloom.favoriz.common.Page
+import com.team.bloom.favoriz.common.toPageable
 import com.team.bloom.favoriz.controller.model.V1Event
 import com.team.bloom.favoriz.controller.model.V1Friend
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.web.PageableDefault
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -11,7 +15,6 @@ import java.time.OffsetDateTime
 class FriendsController() {
 
     @GetMapping("/list")
-    // TODO : Add paging
     fun getFriends(
         @RequestParam(
             "startDateTime",
@@ -21,8 +24,9 @@ class FriendsController() {
             "endDateTime",
             required = false
         )
-        endDateTime: OffsetDateTime?
-    ): List<V1Friend> = List(10) { i -> dummy(i) }
+        endDateTime: OffsetDateTime?,
+        @PageableDefault() pageable: Page
+    ): PageImpl<V1Friend> = PageImpl(List(10) { i -> dummy(i) }, pageable.toPageable(), 10L)
 
     // TODO : TEMPORARY CODE remove this
     fun dummy(id: Int): V1Friend =
