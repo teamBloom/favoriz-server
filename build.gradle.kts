@@ -20,24 +20,23 @@ configurations {
 repositories {
     mavenCentral()
     mavenLocal()
-    maven("http://oss.jfrog.org/artifactory/oss-snapshot-local/")
-
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.data:spring-data-commons-core:1.4.1.RELEASE")
+    implementation("org.springframework.data:spring-data-commons:2.2.2.RELEASE")
+
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // swagger
-    implementation("io.springfox:springfox-swagger2:3.0.0-SNAPSHOT")
-    implementation("io.springfox:springfox-swagger-ui:3.0.0-SNAPSHOT")
-    implementation("io.springfox:springfox-spring-webflux:3.0.0-SNAPSHOT")
+    implementation("io.springfox:springfox-swagger2:2.9.2")
+    implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
 }
 
 tasks.withType<KotlinCompile> {

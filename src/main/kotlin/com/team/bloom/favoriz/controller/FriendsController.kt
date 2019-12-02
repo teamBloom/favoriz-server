@@ -5,7 +5,6 @@ import com.team.bloom.favoriz.common.toPageable
 import com.team.bloom.favoriz.controller.model.V1Event
 import com.team.bloom.favoriz.controller.model.V1Friend
 import org.springframework.data.domain.PageImpl
-import org.springframework.data.web.PageableDefault
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -25,7 +24,7 @@ class FriendsController() {
             required = false
         )
         endDateTime: OffsetDateTime?,
-        @PageableDefault() pageable: Page
+        pageable: Page
     ): PageImpl<V1Friend> = PageImpl(List(10) { i -> dummy(i) }, pageable.toPageable(), 10L)
 
     // TODO : TEMPORARY CODE remove this
