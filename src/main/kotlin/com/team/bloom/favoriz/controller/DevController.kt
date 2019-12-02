@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RestController
 class DevController() {
 
     @GetMapping("/test")
-    fun getSsm(): String = "test"
+    fun test(): String = "test"
 }
