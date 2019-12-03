@@ -5,18 +5,24 @@ import com.team.bloom.favoriz.common.Page
 import com.team.bloom.favoriz.common.toPageable
 import com.team.bloom.favoriz.controller.model.V1Event
 import com.team.bloom.favoriz.controller.model.V1User
+import com.team.bloom.favoriz.external.model.V1FriendElement
+import com.team.bloom.favoriz.service.FriendService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageImpl
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.time.OffsetDateTime
 
 @RestController
 @RequestMapping("/v1/friends")
 class FriendsController() {
+    @Autowired
+    private lateinit var friendService: FriendService
 
     @GetMapping("/list")
+    fun getKakaoTalkFriends(@RequestBody token: String): List<V1FriendElement> =
+        friendService.getFriends(token)
+
+    @GetMapping("/event/list")
     fun getFriends(
         @RequestParam(
             "startDateTime",
