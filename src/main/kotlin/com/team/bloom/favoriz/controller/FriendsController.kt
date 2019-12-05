@@ -1,7 +1,7 @@
 package com.team.bloom.favoriz.controller
 
 import com.team.bloom.favoriz.common.EventType
-import com.team.bloom.favoriz.common.Page
+import com.team.bloom.favoriz.common.PagingApi
 import com.team.bloom.favoriz.common.toPageable
 import com.team.bloom.favoriz.controller.model.V1Event
 import com.team.bloom.favoriz.controller.model.V1User
@@ -33,7 +33,7 @@ class FriendsController() {
             required = false
         )
         endDateTime: OffsetDateTime?,
-        pageable: Page
+        pageable: PagingApi
     ): PageImpl<V1User> = PageImpl(List(10) { i -> dummy(i) }, pageable.toPageable(), 10L)
 
     // TODO : TEMPORARY CODE remove this
