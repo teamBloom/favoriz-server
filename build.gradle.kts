@@ -26,6 +26,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.data:spring-data-commons-core:1.4.1.RELEASE")
     implementation("org.springframework.data:spring-data-commons:2.2.2.RELEASE")
+    implementation("org.postgresql:postgresql:42.2.6")
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")

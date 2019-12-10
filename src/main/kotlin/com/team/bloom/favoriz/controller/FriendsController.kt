@@ -10,6 +10,8 @@ import com.team.bloom.favoriz.service.FriendService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageImpl
 import org.springframework.web.bind.annotation.*
+import java.time.Instant
+import java.time.LocalDateTime
 import java.time.OffsetDateTime
 
 @RestController
@@ -41,7 +43,7 @@ class FriendsController() {
         V1User(
             id.toString(),
             "test-friend",
-            V1Event(1, "test-event", OffsetDateTime.now(), EventType.BIRTHDAY)
+            V1Event(1, "test-event", LocalDateTime.now(), EventType.BIRTHDAY)
         )
 
 

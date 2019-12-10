@@ -1,0 +1,5 @@
+#postgres
+spring.datasource.url: jdbc:postgresql://ec2-174-129-255-91.compute-1.amazonaws.com:5432/dcapjv60rg5plu
+spring.datasource.username: lxutjvceuiqeqv
+spring.datasource.password: cf3364ed144513c3afb4d900ab40069b48c3f1ba631e615b9a3c8f42ae21ac4c
+spring.datasource.driver-class-name: org.postgresql.Driver
