@@ -3,6 +3,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Event">
   <insert id="insertEvent">
-    INSERT INTO event(name, date, type) VALUES(#{name}, #{date}, #{type})
+    INSERT INTO event(name, date, type, user_id) VALUES (#{name}, #{date}, #{type}, #{userId});
   </insert>
+
+  <select id="selectEvent" resultType="com.team.bloom.favoriz.model.Event" parameterType="long">
+    SELECT * FROM event WHERE id = #{id};
+  </select>
+
+  <select id="selectEventList" resultType="com.team.bloom.favoriz.model.Event" parameterType="long">
+    SELECT * FROM event WHERE user_id = #{userId};
+  </select>
 </mapper>

@@ -1,0 +1,8 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Friend">
+  <select id="selectFriends" resultType="com.team.bloom.favoriz.model.User" parameterType="long">
+    SELECT u.id AS id, u.name AS name FROM "user" as u inner join friend as f on f.following = u.id where f.id = 1
+  </select>
+</mapper>

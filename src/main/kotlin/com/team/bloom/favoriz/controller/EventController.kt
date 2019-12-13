@@ -8,42 +8,42 @@ import com.team.bloom.favoriz.converter.EventToV1EventConverter
 import com.team.bloom.favoriz.service.EventService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageImpl
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RestController
-import java.time.Instant
+import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
-import java.time.OffsetDateTime
 
-@RestController("/v1/event")
+@RestController
+@RequestMapping("/v1/users/{userId}")
 class EventController {
     @Autowired
     private lateinit var eventService: EventService
     @Autowired
     private lateinit var converter: EventToV1EventConverter
 
-    @GetMapping("/{id}}")
-    fun get(@PathVariable id: Long): V1Event {
-        return dummy(id)
+    @GetMapping("/events/{id}}")
+    fun get(
+        @PathVariable userId: Long,
+        @PathVariable id: Long
+    ): V1Event {
+        return converter.convert(eventService.getEvent(id, userId))
     }
 
-    @GetMapping("/list")
-    fun list(paging: PagingApi): PageImpl<V1Event> {
-        return PageImpl(List(10) { i -> dummy(i.toLong()) }, paging.toPageable(), 10L)
-    }
-
-    @PostMapping("/create")
-    fun create(event: V1Event) {
-        eventService.createEvent(event)
-    }
-
-    // TODO : Remove
-    fun dummy(id: Long): V1Event =
-        V1Event(
-            id,
-            "test-event",
-            LocalDateTime.now(), EventType.BIRTHDAY
+    @GetMapping("/events/list")
+    fun list(
+        @PathVariable userId: Long,
+        paging: PagingApi
+    ): PageImpl<V1Event> {
+        return PageImpl(
+            converter.convertList(eventService.getEventList(userId)),
+            paging.toPageable(),
+            10L
         )
+    }
 
+    @PostMapping("/events/create")
+    fun create(
+        @PathVariable userId: Long,
+        @RequestBody event: V1Event
+    ) {
+        eventService.createEvent(userId, event)
+    }
 }

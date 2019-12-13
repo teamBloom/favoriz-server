@@ -7,5 +7,6 @@ data class Event(
     val id: Long,
     val name: String,
     val date: OffsetDateTime,
-    val type: EventType
+    val type: EventType,
+    val userId: Long
 )
