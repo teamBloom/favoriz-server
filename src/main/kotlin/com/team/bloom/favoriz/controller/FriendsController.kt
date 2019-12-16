@@ -21,9 +21,12 @@ class FriendsController() {
     private lateinit var converter: UserToV1UserConverter
 
     @GetMapping("/friends/list")
-    fun getFriends(@PathVariable userId: Long, pageable: PagingApi): PageImpl<V1User> =
-        PageImpl(
-            converter.convertList(friendService.getFriends(userId)), pageable.toPageable(), 10L
+    fun getFriends(@PathVariable userId: Long, pagingApi: PagingApi): PageImpl<V1User> {
+        val result = friendService.getFriends(userId, pagingApi.toPageable())
+        return PageImpl(
+            converter.convertList(result), pagingApi.toPageable(), result.size.toLong()
         )
+    }
+
 
 }
