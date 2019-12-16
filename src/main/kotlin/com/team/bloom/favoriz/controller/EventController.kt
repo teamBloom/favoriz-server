@@ -1,6 +1,5 @@
 package com.team.bloom.favoriz.controller
 
-import com.team.bloom.favoriz.common.EventType
 import com.team.bloom.favoriz.common.PagingApi
 import com.team.bloom.favoriz.common.toPageable
 import com.team.bloom.favoriz.controller.model.V1Event
@@ -9,7 +8,6 @@ import com.team.bloom.favoriz.service.EventService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageImpl
 import org.springframework.web.bind.annotation.*
-import java.time.LocalDateTime
 
 @RestController
 @RequestMapping("/v1/users/{userId}")
@@ -32,10 +30,11 @@ class EventController {
         @PathVariable userId: Long,
         paging: PagingApi
     ): PageImpl<V1Event> {
+        val result = eventService.getEventList(userId, paging.toPageable())
         return PageImpl(
-            converter.convertList(eventService.getEventList(userId)),
+            converter.convertList(result),
             paging.toPageable(),
-            10L
+            result.size.toLong()
         )
     }
 

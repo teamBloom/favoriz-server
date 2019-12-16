@@ -1,8 +1,10 @@
 package com.team.bloom.favoriz.repository
 
 import com.team.bloom.favoriz.model.Event
+import org.apache.ibatis.session.RowBounds
 import org.mybatis.spring.SqlSessionTemplate
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -21,7 +23,11 @@ class EventRepository {
         )
     }
 
-    fun getList(userId: Long): List<Event> {
-        return sqlSessionTemplate.selectList("Event.selectEventList", userId)
+    fun getList(userId: Long, pageable: Pageable): List<Event> {
+        return sqlSessionTemplate.selectList(
+            "Event.selectEventList",
+            userId,
+            RowBounds(pageable.offset, pageable.pageSize)
+        )
     }
 }

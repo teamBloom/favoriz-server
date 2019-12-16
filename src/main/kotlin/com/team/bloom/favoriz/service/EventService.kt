@@ -5,6 +5,7 @@ import com.team.bloom.favoriz.converter.V1EventToEventConverter
 import com.team.bloom.favoriz.model.Event
 import com.team.bloom.favoriz.repository.EventRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
 @Service
@@ -18,6 +19,7 @@ class EventService {
         eventRepository.save(converter.convert(userId, event))
 
     fun getEvent(id: Long, userId: Long): Event = eventRepository.get(id, userId)
-    fun getEventList(userId: Long): List<Event> = eventRepository.getList(userId)
+    fun getEventList(userId: Long, pageable: Pageable): List<Event> =
+        eventRepository.getList(userId, pageable)
 
 }
