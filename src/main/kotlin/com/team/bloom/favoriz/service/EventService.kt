@@ -21,5 +21,4 @@ class EventService {
     fun getEvent(id: Long, userId: Long): Event = eventRepository.get(id, userId)
     fun getEventList(userId: Long, pageable: Pageable): List<Event> =
         eventRepository.getList(userId, pageable)
-
 }

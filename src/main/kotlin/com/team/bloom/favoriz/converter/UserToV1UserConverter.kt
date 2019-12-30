@@ -2,6 +2,7 @@ package com.team.bloom.favoriz.converter
 
 import com.team.bloom.favoriz.controller.model.V1User
 import com.team.bloom.favoriz.model.User
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.convert.converter.Converter
 import org.springframework.stereotype.Component
 import java.util.stream.Collectors

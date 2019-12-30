@@ -1,6 +1,7 @@
 package com.team.bloom.favoriz.service
 
 import com.team.bloom.favoriz.model.User
+import com.team.bloom.favoriz.model.UserEvent
 import com.team.bloom.favoriz.repository.FriendRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Pageable
@@ -14,4 +15,6 @@ class FriendService {
     fun getFriends(id: Long, pageable: Pageable): List<User> =
         friendRepository.getFriends(id, pageable)
 
+    fun getFriendsWithUpcomingEvent(id: Long, pageable: Pageable): List<UserEvent> =
+        friendRepository.getFriendsWithUpcomingEvent(id, pageable)
 }
