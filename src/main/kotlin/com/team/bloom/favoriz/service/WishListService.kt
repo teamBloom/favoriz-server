@@ -1,7 +1,10 @@
 package com.team.bloom.favoriz.service
 
-import com.team.bloom.favoriz.controller.model.V1WishList
-import com.team.bloom.favoriz.converter.V1WishListToWishListConverter
+import com.team.bloom.favoriz.controller.model.V1WishListWithProductIds
+import com.team.bloom.favoriz.converter.V1WishListWithProductIdsToWishListWithProductIdsConverter
+import com.team.bloom.favoriz.model.WishList
+import com.team.bloom.favoriz.model.WishListWithProduct
+import com.team.bloom.favoriz.repository.ProductRepository
 import com.team.bloom.favoriz.repository.WishListRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -12,13 +15,31 @@ class WishListService {
     @Autowired
     private lateinit var wishListRepository: WishListRepository
     @Autowired
-    private lateinit var converter: V1WishListToWishListConverter
+    private lateinit var productRepository: ProductRepository
+    @Autowired
+    private lateinit var withProductIdsConverterWithProductIds: V1WishListWithProductIdsToWishListWithProductIdsConverter
 
     // TODO : transactoinal working 확인하기
     @Transactional
-    fun createWishList(wishList: V1WishList) {
-        var wishList = converter.convert(wishList)
-        wishListRepository.saveWishList(wishList)
-        wishListRepository.saveWishListProductLink(wishList.id, wishList.products)
+    fun createWishList(wishListWithProductIds: V1WishListWithProductIds) {
+        var wishListWithProductIds =
+            withProductIdsConverterWithProductIds.convert(wishListWithProductIds)
+        wishListRepository.saveWishList(
+            WishList(
+                wishListWithProductIds.id,
+                wishListWithProductIds.name,
+                wishListWithProductIds.userId
+            )
+        )
+        wishListRepository.saveWishListProductLink(
+            wishListWithProductIds.id,
+            wishListWithProductIds.productIds
+        )
+    }
+
+    fun getList(userId: Long): WishListWithProduct {
+        val wishList = wishListRepository.getWishList(userId)
+        val products = productRepository.getProductsByWishListId(wishList.id)
+        return WishListWithProduct(wishList.id, wishList.name, wishList.userId, products)
     }
 }

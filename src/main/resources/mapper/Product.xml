@@ -3,6 +3,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Product">
   <select id="selectProductList" resultType="com.team.bloom.favoriz.model.Product">
-    SELECT * FROM product;
+    SELECT * FROM product LIMIT #{limit} OFFSET #{offset}
+  </select>
+
+  <select id="selectProductsByIds" resultType="com.team.bloom.favoriz.model.Product">
+    SELECT * FROM wish_list_product_link wlpl JOIN product p ON p.id = wlpl.product_id
+    WHERE wlpl.wish_list_id = #{wishListId}
   </select>
 </mapper>

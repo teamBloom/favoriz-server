@@ -11,4 +11,14 @@
     INSERT INTO wish_list_product_link(wish_list_id, product_id) VALUES (#{wishListId},
     #{productId});
   </insert>
+
+  <select id="selectWishList" parameterType="Map"
+    resultType="com.team.bloom.favoriz.model.WishList">
+    SELECT
+    id AS id,
+    name AS name,
+    user_id AS userId
+    FROM wish_list
+    WHERE user_id = #{userId}
+  </select>
 </mapper>

@@ -1,3 +1,3 @@
 package com.team.bloom.favoriz.model
 
-data class User(val id: Long, val name: String)
+data class User(val id: Long, val name: String, val thumbnail: String)

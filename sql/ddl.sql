@@ -21,6 +21,7 @@ CREATE SEQUENCE IF NOT EXISTS user_id_seq;
 CREATE TABLE "public"."user" (
     "id" int4 NOT NULL DEFAULT nextval('user_id_seq'::regclass),
     "name" varchar(50) NOT NULL,
+    "thumbnail" varchar(2000) NULL,
     PRIMARY KEY ("id")
 );
 

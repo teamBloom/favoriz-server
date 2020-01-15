@@ -3,13 +3,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Friend">
   <select id="selectFriends" resultType="com.team.bloom.favoriz.model.User" parameterType="long">
-    SELECT u.id AS id, u.name AS name FROM "user" as u inner join friend as f on f.following = u.id where f.id = #{id}
+    SELECT u.id AS id, u.name AS name, u.thumbnail AS thumbnail FROM "user" as u inner join friend as f on f.following = u.id where f.id = #{id}
   </select>
 
   <select id="selectFriendsWithUpcomingEvent" resultType="com.team.bloom.favoriz.model.UserEvent" parameterType="long">
     SELECT
       u.id AS id,
       u.name AS name,
+      u.thumbnail AS thumbnail,
       e.id AS eventId,
       e.name AS eventName,
       e.date AS eventDate,

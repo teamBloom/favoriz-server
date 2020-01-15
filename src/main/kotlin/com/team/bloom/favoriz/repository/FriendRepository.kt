@@ -16,7 +16,7 @@ class FriendRepository {
     fun getFriends(id: Long, pageable: Pageable): List<User> {
         return sqlSessionTemplate.selectList(
             "Friend.selectFriends",
-            id,
+            mapOf("id" to id),
             RowBounds(pageable.offset, pageable.pageSize)
         )
     }
