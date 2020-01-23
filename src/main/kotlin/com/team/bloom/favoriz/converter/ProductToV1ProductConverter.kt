@@ -9,7 +9,7 @@ import java.util.stream.Collectors
 @Component
 class ProductToV1ProductConverter : Converter<Product, V1Product> {
     override fun convert(source: Product): V1Product {
-        return V1Product(source.id, source.name, source.price)
+        return V1Product(source.id, source.name, source.price, source.thumbnail)
     }
 
     fun convertList(sourceList: List<Product>): List<V1Product> {
