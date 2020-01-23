@@ -24,7 +24,7 @@ class WishListRepository {
         }
     }
 
-    fun getWishList(userId: Long): WishList {
+    fun getWishList(userId: Long): WishList? {
         return sqlSessionTemplate.selectOne(
             "WishList.selectWishList",
             mapOf("userId" to userId)

@@ -18,7 +18,7 @@ class WishListController() {
     }
 
     @GetMapping("/list")
-    fun getWishList(@PathVariable userId: Long): WishListWithProduct {
+    fun getWishList(@PathVariable userId: Long): WishListWithProduct? {
         return wishListService.getList(userId)
     }
 }

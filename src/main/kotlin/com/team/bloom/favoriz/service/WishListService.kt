@@ -37,8 +37,11 @@ class WishListService {
         )
     }
 
-    fun getList(userId: Long): WishListWithProduct {
+    fun getList(userId: Long): WishListWithProduct? {
         val wishList = wishListRepository.getWishList(userId)
+        if (wishList == null) {
+            return null;
+        }
         val products = productRepository.getProductsByWishListId(wishList.id)
         return WishListWithProduct(wishList.id, wishList.name, wishList.userId, products)
     }
