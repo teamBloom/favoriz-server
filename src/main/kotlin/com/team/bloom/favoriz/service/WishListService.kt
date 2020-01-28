@@ -3,7 +3,9 @@ package com.team.bloom.favoriz.service
 import com.team.bloom.favoriz.controller.model.V1WishListWithProductIds
 import com.team.bloom.favoriz.converter.V1WishListWithProductIdsToWishListWithProductIdsConverter
 import com.team.bloom.favoriz.model.WishList
+import com.team.bloom.favoriz.model.WishListProduct
 import com.team.bloom.favoriz.model.WishListWithProduct
+import com.team.bloom.favoriz.repository.PaymentRepository
 import com.team.bloom.favoriz.repository.ProductRepository
 import com.team.bloom.favoriz.repository.WishListRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +18,8 @@ class WishListService {
     private lateinit var wishListRepository: WishListRepository
     @Autowired
     private lateinit var productRepository: ProductRepository
+    @Autowired
+    private lateinit var paymentRepository: PaymentRepository
     @Autowired
     private lateinit var withProductIdsConverterWithProductIds: V1WishListWithProductIdsToWishListWithProductIdsConverter
 
@@ -40,9 +44,15 @@ class WishListService {
     fun getList(userId: Long): WishListWithProduct? {
         val wishList = wishListRepository.getWishList(userId)
         if (wishList == null) {
-            return null;
+            return null
         }
         val products = productRepository.getProductsByWishListId(wishList.id)
-        return WishListWithProduct(wishList.id, wishList.name, wishList.userId, products)
+
+        val productWithPayment =
+            products.map { it ->
+                WishListProduct(it, paymentRepository.getPaymentSum(userId, it.id))
+            }.toList()
+
+        return WishListWithProduct(wishList.id, wishList.name, wishList.userId, productWithPayment)
     }
 }
