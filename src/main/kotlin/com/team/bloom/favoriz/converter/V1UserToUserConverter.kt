@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component
 import java.util.stream.Collectors
 
 @Component
-class UserToV1UserConverter : Converter<User, V1User> {
-    override fun convert(source: User): V1User {
-        return V1User(source.id, source.name, source.thumbnail, source.kuid)
+class V1UserToUserConverter : Converter<V1User, User> {
+    override fun convert(source: V1User): User {
+        return User(source.uid, source.name, source.thumbnail, source.kuid)
     }
 
-    fun convertList(sourceList: List<User>): List<V1User> {
+    fun convertList(sourceList: List<V1User>): List<User> {
         return sourceList.stream().map { user -> convert(user) }.collect(Collectors.toList())
     }
 }

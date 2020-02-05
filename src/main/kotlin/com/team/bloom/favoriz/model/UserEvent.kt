@@ -12,6 +12,6 @@ data class UserEvent(val user: User, val event: Event) {
         eventName: String,
         eventDate: OffsetDateTime,
         type: EventType
-    ) : this(User(id, name, thumbnail), Event(eventId, eventName, eventDate, type, id))
+    ) : this(User(id, name, thumbnail, null), Event(eventId, eventName, eventDate, type, id))
 }
 
