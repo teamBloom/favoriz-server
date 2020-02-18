@@ -28,4 +28,8 @@ class FriendRepository {
             RowBounds(pageable.offset, pageable.pageSize)
         )
     }
+
+    fun followFriend(id: Long, friendId: Long) =
+        sqlSessionTemplate.insert("Friend.followFriend", mapOf("id" to id, "friendId" to friendId))
+
 }

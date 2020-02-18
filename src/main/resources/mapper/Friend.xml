@@ -31,4 +31,8 @@
     LIMIT 1)
     WHERE f.id = #{id};
   </select>
+
+  <insert id="followFriend" parameterType="Map">
+    INSERT INTO friend(id, following) VALUES (#{id}, #{friendId})
+  </insert>
 </mapper>

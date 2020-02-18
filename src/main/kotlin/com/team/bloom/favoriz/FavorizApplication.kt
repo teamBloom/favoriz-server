@@ -8,7 +8,4 @@ class FavorizApplication
 
 fun main(args: Array<String>) {
 	runApplication<FavorizApplication>(*args)
-
-
-
 }

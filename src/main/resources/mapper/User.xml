@@ -5,4 +5,8 @@
   <insert id="insertUser">
     INSERT INTO "user" (name, thumbnail, kuid) VALUES (#{name}, #{thumbnail}, #{kuid});
   </insert>
+
+  <select id="selectUser" parameterType="Map" resultType="com.team.bloom.favoriz.model.User">
+    SELECT * FROM "user" WHERE id = #{id}
+  </select>
 </mapper>

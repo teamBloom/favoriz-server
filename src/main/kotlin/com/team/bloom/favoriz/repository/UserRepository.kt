@@ -14,4 +14,8 @@ class UserRepository {
     fun saveUser(user: User) {
         sqlSessionTemplate.insert("User.insertUser", user)
     }
+
+    fun getUser(userId: Long): User? {
+        return sqlSessionTemplate.selectOne("User.selectUser", mapOf("id" to userId))
+    }
 }

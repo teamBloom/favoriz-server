@@ -7,12 +7,11 @@ import com.team.bloom.favoriz.controller.model.V1UserEvent
 import com.team.bloom.favoriz.converter.UserEventToV1UserEventConverter
 import com.team.bloom.favoriz.converter.UserToV1UserConverter
 import com.team.bloom.favoriz.service.FriendService
+import com.team.bloom.favoriz.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.PageImpl
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("/v1/users/{userId}")
@@ -23,6 +22,8 @@ class FriendsController() {
     private lateinit var converter: UserToV1UserConverter
     @Autowired
     private lateinit var userEventConverter: UserEventToV1UserEventConverter
+    @Autowired
+    private lateinit var userService: UserService
 
     @GetMapping("/friends/list")
     fun getFriends(@PathVariable userId: Long, pagingApi: PagingApi): PageImpl<V1User> {
@@ -45,5 +46,8 @@ class FriendsController() {
         )
     }
 
-
+    @PostMapping("/friends/follows/{friendId}")
+    fun followFriend(@PathVariable userId: Long, @PathVariable friendId: Long) {
+        userService.getUser(userId).let { user -> friendService.followFriend(userId, friendId) }
+    }
 }

@@ -2,6 +2,7 @@ package com.team.bloom.favoriz.service
 
 import com.team.bloom.favoriz.controller.model.V1User
 import com.team.bloom.favoriz.converter.V1UserToUserConverter
+import com.team.bloom.favoriz.model.User
 import com.team.bloom.favoriz.repository.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -15,5 +16,9 @@ class UserService {
 
     fun createUser(user: V1User) =
         userRepository.saveUser(converter.convert(user))
+
+    fun getUser(userId: Long): User? {
+        return userRepository.getUser(userId)
+    }
 
 }

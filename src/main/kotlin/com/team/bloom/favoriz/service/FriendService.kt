@@ -17,4 +17,7 @@ class FriendService {
 
     fun getFriendsWithUpcomingEvent(id: Long, pageable: Pageable): List<UserEvent> =
         friendRepository.getFriendsWithUpcomingEvent(id, pageable)
+
+    fun followFriend(id: Long, friendId: Long) =
+        friendRepository.followFriend(id, friendId)
 }
