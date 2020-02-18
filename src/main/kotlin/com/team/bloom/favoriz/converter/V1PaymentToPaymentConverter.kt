@@ -10,8 +10,8 @@ import java.util.stream.Collectors
 class V1PaymentToPaymentConverter : Converter<V1Payment, Payment> {
     override fun convert(source: V1Payment): Payment {
         return Payment(
+            source.receiverId,
             source.userId,
-            source.payerId,
             source.wishListId,
             source.productId,
             source.payment
